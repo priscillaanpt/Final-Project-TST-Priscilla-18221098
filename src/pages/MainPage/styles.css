@@ -1,0 +1,15 @@
+/* styles.css */
+.custom-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .custom-button:hover {
+    background-color: darkred;
+  }
+  
