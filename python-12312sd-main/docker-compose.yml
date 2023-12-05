@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  pgsql_womencloth:
+    container_name: pgsql-womencloth
+    image: postgres:12.2
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - pgdata_womencloth:/var/lib/postgresql/data
+    networks:
+      - womencloth_network
+  womencloth_app:
+    build: .
+    entrypoint: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+    env_file:
+      - .env
+    ports:
+      - 8424:80
+    networks:
+      - womencloth_network
+    depends_on:
+      - pgsql_womencloth
+networks:
+  womencloth_network:
+volumes:
+  pgdata_womencloth:
